@@ -1412,7 +1412,7 @@
 
         // Load applications
         function loadApplications() {
-            fetch('http://localhost:3000/api/applications')
+            fetch('http://98.80.67.100:3007/api/applications')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Failed to fetch applications');
@@ -1795,8 +1795,8 @@
         // Update application status
         function updateApplicationStatus(refNo, status, offerLetterData = null) {
             const endpoint = offerLetterData
-                ? `http://localhost:3000/api/applications/${refNo}/offer-letter`
-                : `http://localhost:3000/api/applications/${refNo}/status`;
+                ? `http://98.80.67.100:3007/api/applications/${refNo}/offer-letter`
+                : `http://98.80.67.100:3007/api/applications/${refNo}/status`;
             const body = offerLetterData ? { offerLetter: offerLetterData } : { status };
 
             fetch(endpoint, {
@@ -1830,7 +1830,7 @@
         // Get application document from backend
         async function getApplicationDocument(refNo, fileType) {
             try {
-                const response = await fetch(`http://localhost:3000/api/applications/${refNo}/document/${fileType}`);
+                const response = await fetch(`http://98.80.67.100:3007/api/applications/${refNo}/document/${fileType}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch document');
                 }
@@ -1917,7 +1917,7 @@
             showNotification(
                 `Are you sure you want to clear ${selectedRefs.length} selected record(s)? This action cannot be undone.`,
                 function () {
-                    fetch('http://localhost:3000/api/applications', {
+                    fetch('http://98.80.67.100:3007/api/applications', {
                         method: 'DELETE',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ refNos: selectedRefs })

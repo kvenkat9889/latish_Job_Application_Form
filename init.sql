@@ -1,10 +1,3 @@
--- Create the database
-CREATE DATABASE job_application_db;
-
--- Connect to the database
-\c job_application_db
-
--- Create the applications table
 CREATE TABLE applications (
     ref_no VARCHAR(20) PRIMARY KEY, -- Unique application reference number (e.g., APP-2025-12345)
     name VARCHAR(50) NOT NULL, -- Applicant's full name

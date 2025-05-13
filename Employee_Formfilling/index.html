@@ -1808,7 +1808,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to check for duplicate email or phone number
     async function checkForDuplicates(email, phone) {
         try {
-            const response = await fetch('http://localhost:3000/api/check-duplicate', {
+            const response = await fetch('http://98.80.67.100:3007/api/check-duplicate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, phone })
@@ -1827,7 +1827,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to save application data
     async function saveApplicationData(data) {
         try {
-            const response = await fetch('http://localhost:3000/api/applications', {
+            const response = await fetch('http://98.80.67.100:3007/api/applications', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
