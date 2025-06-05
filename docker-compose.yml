@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    ports:
+      - "3007:3007"
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin123
+      - POSTGRES_DB=job_application_db
+    depends_on:
+      - postgres
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  employee_formfilling:
+    build:
+      context: ./Employee_Formfilling
+      dockerfile: Dockerfile
+    ports:
+      - "9013:80"
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  hr_formfilling:
+    build:
+      context: ./HR_FormFilling
+      dockerfile: Dockerfile
+    ports:
+      - "9014:80"
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:14
+    ports:
+      - "5438:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin123
+      - POSTGRES_DB=job_application_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge
