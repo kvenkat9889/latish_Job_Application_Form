@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Your Journey Begins Here</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #4b54a2 100%);
+            --secondary: #f59e0b;
+            --success: #10b981;
+            --info: #06b6d4;
+            --warning: #f59e0b;
+            --light: #f8fafc;
+            --lighter: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --text-muted: #94a3b8;
+            --border: #e2e8f0;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            --border-radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 50%, #f8fafc 100%);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Floating particles background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+        }
+
+        /* Header Section */
+        .header {
+            background: var(--primary-gradient);
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: backgroundMove 20s linear infinite;
+        }
+
+        @keyframes backgroundMove {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(50px, 50px) rotate(360deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 3;
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            animation: slideInDown 1s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 30px;
+            animation: slideInUp 1s ease-out 0.2s both;
+        }
+
+        .header-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            animation: fadeIn 1s ease-out 0.4s both;
+        }
+
+        .header-icon {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 20px;
+            color: white;
+            font-size: 2rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .header-icon:hover {
+            transform: translateY(-10px) scale(1.1);
+            background: rgba(255,255,255,0.3);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 100%;
+            margin: -20px auto 0;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-card {
+            background: var(--lighter);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            padding: 50px;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: slideInUp 0.8s ease-out 0.6s both;
+        }
+
+        .welcome-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .welcome-description {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .download-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            border: 2px dashed var(--border);
+            transition: var(--transition);
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+        }
+
+        .download-section:hover {
+            border-color: var(--primary-light);
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .download-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .download-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .download-subtext {
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .click-here-btn {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .click-here-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .click-here-btn:hover::before {
+            transform: translateX(100%);
+        }
+
+        .click-here-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease-out 1s both;
+        }
+
+        .feature-card {
+            background: var(--lighter);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 15px;
+        }
+
+        .feature-description {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            background: var(--lighter);
+            border-radius: var(--border-radius);
+            padding: 50px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            animation: fadeInUp 0.8s ease-out 1.2s both;
+        }
+
+        .benefits-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 40px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+
+        .benefit-item:hover {
+            transform: translateX(10px);
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: var(--shadow);
+        }
+
+        .benefit-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            min-width: 30px;
+        }
+
+        .benefit-text {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            background: var(--lighter);
+            border-radius: var(--border-radius);
+            padding: 50px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            animation: fadeInUp 0.8s ease-out 1.4s both;
+        }
+
+        .timeline-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 40px;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary-gradient);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            width: 45%;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        }
+
+        .timeline-icon {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--primary-gradient);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            z-index: 2;
+        }
+
+        .timeline-step {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            color: var(--text-light);
+        }
+
+        /* Form Container - Hidden by default */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--lighter);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            padding: 40px;
+            display: none;
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        .container.show {
+            display: block;
+        }
+
+        .form-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .form-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid var(--border);
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            transition: var(--transition);
+            background: var(--light);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            background: var(--lighter);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .submit-btn:hover::before {
+            transform: translateX(100%);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        .offer-letter-section {
+            display: none;
+            margin-top: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: var(--border-radius);
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .offer-letter-section.show {
+            display: block;
+        }
+
+        .document-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background: var(--lighter);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .document-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .document-name {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .document-name i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .document-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-sm {
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-sm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary-gradient);
+            color: white;
+            padding: 20px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .header-icons {
+                gap: 20px;
+            }
+
+            .header-icon {
+                padding: 15px;
+                font-size: 1.5rem;
+            }
+
+            .welcome-card {
+                padding: 30px;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: row !important;
+            }
+
+            .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 60px;
+            }
+
+            .timeline-icon {
+                left: 30px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .document-item {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .document-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+
+        /* Animation delays for staggered effects */
+        .feature-card:nth-child(1) { animation-delay: 1.1s; }
+        .feature-card:nth-child(2) { animation-delay: 1.2s; }
+        .feature-card:nth-child(3) { animation-delay: 1.3s; }
+        .feature-card:nth-child(4) { animation-delay: 1.4s; }
+
+        .benefit-item:nth-child(odd) { animation-delay: 0.1s; }
+        .benefit-item:nth-child(even) { animation-delay: 0.2s; }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.6s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.8s; }
+
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="main-title">
+                <i class="fas fa-star"></i> Welcome to Your Future <i class="fas fa-star"></i>
+            </h1>
+            <p class="subtitle">
+                <i class="fas fa-rocket"></i> Congratulations! Your journey with us begins now.
+                Get ready to unlock amazing opportunities and experiences.
+            </p>
+            <div class="header-icons">
+                <div class="header-icon" title="Professional Growth">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="header-icon" title="Team Collaboration">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="header-icon" title="Innovation">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="header-icon" title="Success">
+                    <i class="fas fa-trophy"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Welcome Card -->
+        <div class="welcome-card">
+            <h2 class="welcome-title">
+                <i class="fas fa-handshake"></i> Your Application Has Been Approved!
+            </h2>
+            <p class="welcome-description">
+                We're thrilled to have you join our team. Your skills, experience, and passion make you a perfect fit for our organization. Let's embark on this exciting journey together and create something extraordinary.
+            </p>
+        </div>
+
+        <!-- Download Section -->
+        <div class="download-section">
+            <div class="download-icon">
+                <i class="fas fa-file-contract"></i>
+            </div>
+            <div class="download-text">Ready to Get Started?</div>
+            <div class="download-subtext">
+                Your official offer letter is ready for download. Click below to access your personalized employment documentation.
+            </div>
+            <button class="click-here-btn" id="showFormBtn">
+                <i class="fas fa-download"></i>
+                <span>Click Here to Download Your Offer Letter</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="features-grid">
+            <div class="feature-card animate__animated animate__fadeIn">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="feature-title">Secure & Confidential</h3>
+                <p class="feature-description">
+                    Your personal information and documents are protected with enterprise-grade security measures and encryption protocols.
+                </p>
+            </div>
+            <div class="feature-card animate__animated animate__fadeIn">
+                <div class="feature-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3 class="feature-title">Instant Access</h3>
+                <p class="feature-description">
+                    Get immediate access to your offer letter and employment documents anytime, anywhere, from any device.
+                </p>
+            </div>
+            <div class="feature-card animate__animated animate__fadeIn">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3 class="feature-title">24/7 Support</h3>
+                <p class="feature-description">
+                    Our dedicated support team is available round the clock to assist you with any questions or concerns.
+                </p>
+            </div>
+        </div>
+
+        <!-- Benefits Section -->
+        <div class="benefits-section">
+            <h2 class="benefits-title">
+                <i class="fas fa-gift"></i> What You'll Enjoy With Us
+            </h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <i class="fas fa-money-bill-wave benefit-icon"></i>
+                    <span class="benefit-text">Competitive Salary Package</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-hospital benefit-icon"></i>
+                    <span class="benefit-text">Comprehensive Health Insurance</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-plane benefit-icon"></i>
+                    <span class="benefit-text">Flexible Vacation Policy</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-graduation-cap benefit-icon"></i>
+                    <span class="benefit-text">Professional Development Programs</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-home benefit-icon"></i>
+                    <span class="benefit-text">Work From Home Options</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-dumbbell benefit-icon"></i>
+                    <span class="benefit-text">Fitness & Wellness Programs</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-birthday-cake benefit-icon"></i>
+                    <span class="benefit-text">Team Events & Celebrations</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-laptop benefit-icon"></i>
+                    <span class="benefit-text">Latest Technology & Equipment</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline Section -->
+        <div class="timeline-section">
+            <h2 class="timeline-title">
+                <i class="fas fa-route"></i> Your Journey So Far
+            </h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-step">Step 1: Application Review</h3>
+                        <p class="timeline-description">
+                            Our team carefully reviews your application to ensure it aligns with our requirements.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-step">Step 2: Interview Process</h3>
+                        <p class="timeline-description">
+                            You’ve successfully completed the interviews, showcasing your skills and passion.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-step">Step 3: Offer Letter</h3>
+                        <p class="timeline-description">
+                            Your offer letter is ready! Submit your details to access it and join our team.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-step">Step 4: Onboarding</h3>
+                        <p class="timeline-description">
+                            Get ready to start your journey with our comprehensive onboarding process.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Container -->
+        <div class="container" id="formContainer">
+            <h2 class="form-title">
+                <i class="fas fa-user"></i> Access Your Offer Letter
+            </h2>
+            <p style="text-align: center; color: var(--text-light); margin-bottom: 30px;">
+                Please enter your details to access your offer letter.
+            </p>
+            <div class="form-group">
+                <label for="refNo"><i class="fas fa-id-badge"></i> Reference ID</label>
+                <input type="text" id="refNo" placeholder="Enter Reference ID">
+            </div>
+            <div class="form-group">
+                <label for="fullName"><i class="fas fa-user"></i> Full Name</label>
+                <input type="text" id="fullName" placeholder="Enter Full Name">
+            </div>
+            <div class="form-group">
+                <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                <input type="email" id="email" placeholder="Enter Email">
+            </div>
+            <button class="submit-btn" id="submitBtn">
+                <i class="fas fa-check"></i> Submit
+            </button>
+            <div class="offer-letter-section" id="offerLetterSection">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">
+                    <i class="fas fa-file-contract"></i> Your Offer Letter
+                </h3>
+                <div class="document-item" id="offerLetterItem" style="display: none;">
+                    <div class="document-name">
+                        <i class="fas fa-file-pdf"></i> Offer Letter
+                    </div>
+                    <div class="document-actions">
+                        <button class="btn-sm btn-success" id="downloadOfferLetterBtn">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // DOM Elements
+        const showFormBtn = document.getElementById('showFormBtn');
+        const formContainer = document.getElementById('formContainer');
+        const refNoInput = document.getElementById('refNo');
+        const fullNameInput = document.getElementById('fullName');
+        const emailInput = document.getElementById('email');
+        const submitBtn = document.getElementById('submitBtn');
+        const offerLetterSection = document.getElementById('offerLetterSection');
+        const offerLetterItem = document.getElementById('offerLetterItem');
+        const downloadOfferLetterBtn = document.getElementById('downloadOfferLetterBtn');
+
+        // Floating Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 6}s`;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Show toast notification
+        function showToast(message, isError = false) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-circle' : 'fa-check-circle'}"></i> ${message}`;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 400);
+            }, 3000);
+        }
+
+        // Fetch application details
+        async function fetchApplication(refNo, name, email) {
+            try {
+                const response = await fetch(`http://98.80.67.100:3007/api/applications/${refNo}`);
+                if (!response.ok) {
+                    throw new Error('Application not found');
+                }
+                const application = await response.json();
+
+                // Verify name, email, and status
+                if (
+                    application.name.toLowerCase() === name.toLowerCase() &&
+                    application.email.toLowerCase() === email.toLowerCase() &&
+                    application.status === 'Approved' &&
+                    application.documents.offerLetter
+                ) {
+                    return true; // Offer letter exists
+                } else {
+                    throw new Error('Invalid details or no offer letter available');
+                }
+            } catch (err) {
+                console.error('Error fetching application:', err);
+                showToast(err.message, true);
+                return false;
+            }
+        }
+
+        // Download offer letter
+        function downloadOfferLetter(refNo) {
+            const url = `http://98.80.67.100:3007/api/applications/${refNo}/document/offerLetter`;
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = ''; // Let server set the filename via Content-Disposition
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            showToast('Download started successfully!');
+        }
+
+        // Event Listeners
+        showFormBtn.addEventListener('click', () => {
+            formContainer.classList.add('show');
+            formContainer.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        submitBtn.addEventListener('click', async () => {
+            const refNo = refNoInput.value.trim();
+            const fullName = fullNameInput.value.trim();
+            const email = emailInput.value.trim();
+
+            if (!refNo || !fullName || !email) {
+                showToast('Please fill in all fields.', true);
+                return;
+            }
+
+            const hasOfferLetter = await fetchApplication(refNo, fullName, email);
+            if (hasOfferLetter) {
+                offerLetterSection.classList.add('show');
+                offerLetterItem.style.display = 'flex';
+                showToast('Offer letter found! You can now download it.');
+            }
+        });
+
+        downloadOfferLetterBtn.addEventListener('click', () => {
+            const refNo = refNoInput.value.trim();
+            if (!refNo) {
+                showToast('Please enter a Reference ID.', true);
+                return;
+            }
+            downloadOfferLetter(refNo);
+        });
+
+        // Initialize particles
+        document.addEventListener('DOMContentLoaded', createParticles);
+    </script>
+</body>
+</html>

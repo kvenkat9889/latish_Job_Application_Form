@@ -7,16 +7,16 @@ const port = 3007;
 
 // PostgreSQL connection
 const pool = new Pool({
-    user: 'postgres',
+    user: 'postgres', // Replace with your PostgreSQL username
     host: 'postgres',
     database: 'job_application_db',
-    password: 'admin123',
+    password: 'admin123', // Replace with your PostgreSQL password
     port: 5432,
 });
 
 // Middleware
 app.use(cors());
-app.use(express.json({ limit: '50mb' }));
+app.use(express.json({ limit: '50mb' })); // Increase limit for base64 file data
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Check database connection
@@ -63,16 +63,19 @@ app.post('/api/check-duplicate', async (req, res) => {
 app.post('/api/applications', async (req, res) => {
     const applicationData = req.body;
 
+    // Validate required fields
     if (!applicationData.refNo || !applicationData.email || !applicationData.phone || !applicationData.documents) {
         return res.status(400).json({ error: 'Missing required fields' });
     }
 
     try {
+        // Check for duplicates
         const isDuplicate = await checkDuplicate(applicationData.email, applicationData.phone);
         if (isDuplicate) {
             return res.status(400).json({ error: 'An application with this email or phone number already exists.' });
         }
 
+        // Prepare query parameters
         const queryText = `
             INSERT INTO applications (
                 ref_no, name, email, phone, gender, guardian_name, guardian_phone,
@@ -198,13 +201,27 @@ app.get('/api/applications/:refNo', async (req, res) => {
     }
 });
 
-// Endpoint to download offer letter
-app.get('/api/applications/:refNo/document/offerLetter', async (req, res) => {
-    const { refNo } = req.params;
+// Endpoint to retrieve a specific document by ref_no and document_type
+app.get('/api/applications/:refNo/document/:documentType', async (req, res) => {
+    const { refNo, documentType } = req.params;
+
+    // Map documentType to database column names
+    const documentMap = {
+        sscCertificate: { name: 'ssc_certificate_name', data: 'ssc_certificate_data' },
+        hscCertificate: { name: 'hsc_certificate_name', data: 'hsc_certificate_data' },
+        graduationCertificate: { name: 'graduation_certificate_name', data: 'graduation_certificate_data' },
+        pgCertificate: { name: 'pg_certificate_name', data: 'pg_certificate_data' },
+        relevingLetter: { name: 'relieving_letter_name', data: 'relieving_letter_data' },
+        offerLetter: { name: 'offer_letter_name', data: 'offer_letter_data' },
+    };
+
+    if (!documentMap[documentType]) {
+        return res.status(400).json({ error: 'Invalid document type' });
+    }
 
     try {
         const queryText = `
-            SELECT offer_letter_name AS name, offer_letter_data AS data
+            SELECT ${documentMap[documentType].name} AS name, ${documentMap[documentType].data} AS data
             FROM applications
             WHERE ref_no = $1
         `;
@@ -216,24 +233,14 @@ app.get('/api/applications/:refNo/document/offerLetter', async (req, res) => {
 
         const { name, data } = result.rows[0];
         if (!name || !data) {
-            return res.status(404).json({ error: 'Offer letter not found for this application' });
+            return res.status(404).json({ error: `Document ${documentType} not found for this application` });
         }
 
-        // Extract base64 data from data URI
-        const base64Data = data.split(',')[1];
         const mimeType = data.split(';')[0].split(':')[1];
-        const buffer = Buffer.from(base64Data, 'base64');
-
-        // Set headers for file download
-        res.setHeader('Content-Type', mimeType);
-        res.setHeader('Content-Disposition', `attachment; filename="${name}"`);
-        res.setHeader('Content-Length', buffer.length);
-
-        // Send the file buffer
-        res.send(buffer);
+        res.json({ name, data, mimeType });
     } catch (err) {
-        console.error('Error retrieving offer letter:', err);
-        res.status(500).json({ error: 'Failed to retrieve offer letter' });
+        console.error(`Error retrieving document ${documentType}:`, err);
+        res.status(500).json({ error: `Failed to retrieve document ${documentType}` });
     }
 });
 
